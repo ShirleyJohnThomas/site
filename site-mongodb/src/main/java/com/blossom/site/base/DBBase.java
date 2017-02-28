@@ -3,6 +3,7 @@ package com.blossom.site.base;
 
 import com.blossom.site.util.SystemExceptionEnum;
 import com.blossom.tools.exception.SystemExceptionUtils;
+import com.blossom.tools.log.LoggerUtils;
 import com.blossom.tools.object.ObjectUtils;
 import com.blossom.tools.string.StringUtils;
 import com.mongodb.DB;
@@ -14,6 +15,8 @@ import com.mongodb.MongoClient;
  * @time 2017年2月27日 下午4:56:23
  */
 public class DBBase {
+	
+	private static final Class<?> CLAZZ = DBBase.class;
 	
 	private static final DBBase DB_BASE = new DBBase();
 	private static MongoClient mongoClient = null;
@@ -31,6 +34,7 @@ public class DBBase {
 	 */
 	public static DBBase getInstall(MongoClient mongoClient) throws SystemExceptionUtils{
 		if (ObjectUtils.isEmpty(mongoClient)) {
+			LoggerUtils.addLoggerError(CLAZZ, "getInstall", "数据库未连接!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INVOMPLELE_CONFIGDATABASE_ERROR.toString());
 		}
 		DBBase.mongoClient = mongoClient;
@@ -47,6 +51,7 @@ public class DBBase {
 	@SuppressWarnings("deprecation")
 	public DB getDB(String dbName) throws SystemExceptionUtils{
 		if (StringUtils.isEmpty(dbName)) {
+			LoggerUtils.addLoggerError(CLAZZ, "getDB", "数据库名不能为空!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INVOMPLELE_DATABASE_ERROR.toString());
 		}
 		return DBBase.mongoClient.getDB(dbName);
@@ -60,6 +65,7 @@ public class DBBase {
 	 *
 	 */
 	public void close(){
+		LoggerUtils.addLoggerInfo(CLAZZ, "close", "关闭连接!");
 		DBBase.mongoClient.close();
 	}
 	

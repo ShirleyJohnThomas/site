@@ -5,6 +5,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import com.blossom.site.util.SystemExceptionEnum;
 import com.blossom.tools.exception.SystemExceptionUtils;
+import com.blossom.tools.log.LoggerUtils;
 import com.blossom.tools.object.ObjectUtils;
 import com.blossom.tools.string.StringUtils;
 import com.mongodb.BasicDBObject;
@@ -18,6 +19,8 @@ import com.mongodb.DBObject;
  * @time 2017年2月27日 下午5:17:00
  */
 public class DataBase {
+	
+	private static final Class<?> CLAZZ = DataBase.class;
 	
 	private static final DataBase DATA_BASE = new DataBase();
 	private static DBCollection dbCollection = null;
@@ -33,6 +36,7 @@ public class DataBase {
 	 */
 	public static DataBase getInstall(DBCollection dbCollection) throws SystemExceptionUtils{
 		if (ObjectUtils.isEmpty(dbCollection)) {
+			LoggerUtils.addLoggerError(CLAZZ, "getInstall", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INVOMPLELE_COLLECTION_ERROR.toString());
 		}
 		DataBase.dbCollection = dbCollection;
@@ -48,7 +52,9 @@ public class DataBase {
 	 *
 	 */
 	public void insert(DBObject object) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "insert", "插入数据!");
 		if (ObjectUtils.isEmpty(object)) {
+			LoggerUtils.addLoggerError(CLAZZ, "insert", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		dbCollection.insert(object);
@@ -63,7 +69,9 @@ public class DataBase {
 	 *
 	 */
 	public void remove(DBObject object) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "remove", "删除指定文档!");
 		if (ObjectUtils.isEmpty(object)) {
+			LoggerUtils.addLoggerError(CLAZZ, "remove", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		dbCollection.remove(object);
@@ -77,6 +85,7 @@ public class DataBase {
 	 *
 	 */
 	public void deleteAll(){
+		LoggerUtils.addLoggerInfo(CLAZZ, "deleteAll", "清空集合!");
 		List<DBObject> objects = findAll();
 		for (int i = 0; i < objects.size(); i++) {
 			dbCollection.remove(objects.get(i));
@@ -91,6 +100,7 @@ public class DataBase {
 	 *
 	 */
 	public List<DBObject> findAll(){
+		LoggerUtils.addLoggerInfo(CLAZZ, "findAll", "获取全部文档!");
 		return dbCollection.find().toArray();
 	}
 	
@@ -103,7 +113,9 @@ public class DataBase {
 	 *
 	 */
 	public DBObject findOne(DBObject object) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "findOne", "获取1条记录!");
 		if (ObjectUtils.isEmpty(object)) {
+			LoggerUtils.addLoggerError(CLAZZ, "findOne", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		return dbCollection.findOne(object);
@@ -118,7 +130,9 @@ public class DataBase {
 	 *
 	 */
 	public List<DBObject> find(DBObject object,int limit) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "find", "获取指定条数数据!");
 		if (ObjectUtils.isEmpty(object)) {
+			LoggerUtils.addLoggerError(CLAZZ, "find", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		return dbCollection.find(object).limit(limit).toArray();
@@ -133,7 +147,9 @@ public class DataBase {
 	 *
 	 */
 	public List<DBObject> find(DBObject object) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "find", "获取指定条数数据!");
 		if (ObjectUtils.isEmpty(object)) {
+			LoggerUtils.addLoggerError(CLAZZ, "find", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		return dbCollection.find(object).toArray();
@@ -148,7 +164,9 @@ public class DataBase {
 	 *
 	 */
 	public LinkedBlockingQueue<DBObject> findQueue(DBObject object) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "findQueue", "返回Queue的查询!");
 		if (ObjectUtils.isEmpty(object)) {
+			LoggerUtils.addLoggerError(CLAZZ, "LinkedBlockingQueue", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		LinkedBlockingQueue<DBObject> queue = new LinkedBlockingQueue<DBObject>();
@@ -171,7 +189,9 @@ public class DataBase {
 	 *
 	 */
 	public void updateOrInsert(DBObject set,DBObject where) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "updateOrInsert", "插入数据!");
 		if (ObjectUtils.isEmpty(set) || ObjectUtils.isEmpty(where)) {
+			LoggerUtils.addLoggerError(CLAZZ, "updateOrInsert", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		dbCollection.update(where, set, true, false);
@@ -186,7 +206,9 @@ public class DataBase {
 	 *
 	 */
 	public void updateExistDataWithBatch(DBObject set,DBObject where) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "updateExistDataWithBatch", "批量更新，但不添加");
 		if (ObjectUtils.isEmpty(set) || ObjectUtils.isEmpty(where)) {
+			LoggerUtils.addLoggerError(CLAZZ, "updateExistDataWithBatch", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		dbCollection.update(where, new BasicDBObject("$set",set),true,false);
@@ -201,7 +223,9 @@ public class DataBase {
 	 *
 	 */
 	public void updateBatchByObjectId(String ids, DBObject set) throws SystemExceptionUtils{
+		LoggerUtils.addLoggerInfo(CLAZZ, "updateBatchByObjectId", "批量更新!");
 		if (StringUtils.isEmpty(ids) || ObjectUtils.isEmpty(set)) {
+			LoggerUtils.addLoggerError(CLAZZ, "updateBatchByObjectId", "参数不全!");
 			throw new SystemExceptionUtils(SystemExceptionEnum.SYSTEM_INCOMPLETE_PARAMETER_ERROR.toString());
 		}
 		 String[] id = ids.split(",");
