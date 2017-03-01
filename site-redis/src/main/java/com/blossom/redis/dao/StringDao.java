@@ -1,5 +1,8 @@
 package com.blossom.redis.dao;
 
+import java.util.List;
+
+
 import com.blossom.redis.JedisUtils;
 
 
@@ -57,6 +60,73 @@ public class StringDao {
 	}
 	
 	/**
+	 * @Description: 同时设置多个keyvalue值
+	 * @author Blossom
+	 * @time 2017年3月1日 上午10:18:48 
+	 * @return_type void
+	 *
+	 */
+	public void msave(String...keysvalues){
+		JedisUtils.getJedis().mset(keysvalues);
+	}
+	
+	/**
+	 * @Description:同时设置多个keyvalue值 
+	 * @author Blossom
+	 * @time 2017年3月1日 上午10:19:41 
+	 * @return_type void
+	 *
+	 */
+	public void msave(byte[]...keysvalues){
+		JedisUtils.getJedis().mset(keysvalues);
+	}
+	
+	/**
+	 * @Description: 设置key对应的value值（只有当key不存在才能执行成功）
+	 * @author Blossom
+	 * @time 2017年3月1日 上午10:21:05 
+	 * @return_type void
+	 *
+	 */
+	public void savenx(String key,String value){
+		JedisUtils.getJedis().setnx(key, value);
+	}
+	
+	/**
+	 * @Description: 设置key对应的value值（只有当key不存在才能执行成功）
+	 * @author Blossom
+	 * @time 2017年3月1日 上午10:21:05 
+	 * @return_type void
+	 *
+	 */
+	public void savenx(byte[] key,byte[] value){
+		JedisUtils.getJedis().setnx(key, value);
+	}
+	
+	/**
+	 * @Description:同时设置多个keyvalue值 （只有当key不存在才能执行成功） 
+	 * @author Blossom
+	 * @time 2017年3月1日 上午10:23:09 
+	 * @return_type void
+	 *
+	 */
+	public void msavenx(byte[]...keysvalues){
+		JedisUtils.getJedis().msetnx(keysvalues);
+	}
+
+	/**
+	 * @Description:同时设置多个keyvalue值  （只有当key不存在才能执行成功）
+	 * @author Blossom
+	 * @time 2017年3月1日 上午10:23:35 
+	 * @return_type void
+	 *
+	 */
+	public void msavenx(String...keysvalues){
+		JedisUtils.getJedis().msetnx(keysvalues);
+	}
+
+	
+	/**
 	 * @Description: 追加字符串
 	 * @author Blossom
 	 * @time 2017年2月28日 下午6:35:19 
@@ -98,6 +168,28 @@ public class StringDao {
 	 */
 	public byte[] get(byte[] key){
 		return JedisUtils.getJedis().get(key);
+	}
+	
+	/**
+	 * @Description: 获取多个key对应的值
+	 * @author Blossom
+	 * @time 2017年3月1日 上午10:15:37 
+	 * @return_type List<String>
+	 *
+	 */
+	public List<String> mget(String...keys){
+		return JedisUtils.getJedis().mget(keys);
+	}
+	
+	/**
+	 * @Description: 获取多个key对应的值
+	 * @author Blossom
+	 * @time 2017年3月1日 上午10:17:16 
+	 * @return_type List<byte[]>
+	 *
+	 */
+	public List<byte[]> mget(byte[]...keys){
+		return JedisUtils.getJedis().mget(keys);
 	}
 	
 	/**
