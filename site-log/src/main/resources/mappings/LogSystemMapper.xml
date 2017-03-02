@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blossom.log.mapper.LogSystemMapper">
+
+
+	<resultMap type="com.blossom.log.model.LogSystemModel" id="SystemLogMap">
+		<result column="id" property="id"/>
+		<result column="className" property="className"/>
+		<result column="methodName" property="methodName"/>
+		<result column="createTime" property="createTime"/>
+		<result column="loglevel" property="loglevel"/>
+		<result column="message" property="message"/>
+	</resultMap>
+	
+	<!-- 获取系统日志 -->
+	<select id="queryLogSystem" parameterType="java.util.Map" resultMap="SystemLogMap">
+		SELECT id,className,methodName,createTime,loglevel,message
+		FROM tb_system_log
+		
+	</select>
+
+</mapper>

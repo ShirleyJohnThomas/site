@@ -1,0 +1,2 @@
+[2017-03-02 16:56:00,480] 0    [http-nio-127.0.0.1-3344-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource  - {dataSource-1} inited 
+[2017-03-02 16:56:00,901] 421  [http-nio-127.0.0.1-3344-exec-1] INFO  com.blossom.log.service.impl.LogSystemServiceImpl  - 获取系统日志! 

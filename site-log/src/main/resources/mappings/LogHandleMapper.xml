@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blossom.log.mapper.LogHandleMapper">
+
+    <!--添加日志信息-->
+    <insert id="insertLogHandleInfo" parameterType="com.blossom.log.model.LogHandleModel">
+        INSERT INTO
+          tb_handle_log(id,logType,httpUrl,httpMethod,description,method,requestIp,exceptionCode,
+          exceptionDetail,params,userName,createDate,broswer)
+        VALUES (#{id},#{logType},#{httpUrl},#{httpMethod},#{description},#{method},#{requestIp},#{exceptionCode},
+                #{exceptionDetail},#{params},#{userName},#{createDate},#{broswer})
+    </insert>
+
+</mapper>

@@ -41,6 +41,7 @@
     <module>site-spring-quartz</module>
     <module>site-mybatis</module>
     <module>site-hibernate</module>
+    <module>site-log</module>
   </modules>
   <dependencies>
   
