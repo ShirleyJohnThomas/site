@@ -42,6 +42,7 @@
     <module>site-mybatis</module>
     <module>site-hibernate</module>
     <module>site-log</module>
+    <module>site-shiro</module>
   </modules>
   <dependencies>
   
