@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-4 23:07:27 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.blossom.author.entity.GroupRoleEntity" table="GROUPROLEENTITY">
+        <id name="roleId" type="java.lang.Integer">
+            <column name="ROLEID" />
+            <generator class="assigned" />
+        </id>
+        <property name="groupRoleId" type="java.lang.Integer">
+            <column name="GROUPROLEID" />
+        </property>
+        <property name="groupId" type="java.lang.Integer">
+            <column name="GROUPID" />
+        </property>
+    </class>
+</hibernate-mapping>

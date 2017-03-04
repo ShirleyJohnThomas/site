@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-4 23:07:27 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.blossom.author.entity.GroupAuthortyEntity" table="GROUPAUTHORTYENTITY">
+        <id name="groupId" type="java.lang.Integer">
+            <column name="GROUPID" />
+            <generator class="assigned" />
+        </id>
+        <property name="groupAuthortyId" type="java.lang.Integer">
+            <column name="GROUPAUTHORTYID" />
+        </property>
+        <property name="authortyId" type="java.lang.Integer">
+            <column name="AUTHORTYID" />
+        </property>
+        <property name="authortyType" type="java.lang.Integer">
+            <column name="AUTHORTYTYPE" />
+        </property>
+    </class>
+</hibernate-mapping>

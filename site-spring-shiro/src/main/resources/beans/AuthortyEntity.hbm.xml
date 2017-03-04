@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-4 23:07:27 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.blossom.author.entity.AuthortyEntity" table="AUTHORTYENTITY">
+        <id name="authortyId" type="java.lang.Integer">
+            <column name="AUTHORTYID" />
+            <generator class="assigned" />
+        </id>
+        <property name="fatherAuthoryId" type="java.lang.Integer">
+            <column name="FATHERAUTHORYID" />
+        </property>
+        <property name="authoryName" type="java.lang.String">
+            <column name="AUTHORYNAME" />
+        </property>
+        <property name="authoryDescription" type="java.lang.String">
+            <column name="AUTHORYDESCRIPTION" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -43,6 +43,7 @@
     <module>site-hibernate</module>
     <module>site-log</module>
     <module>site-shiro</module>
+    <module>site-spring-shiro</module>
   </modules>
   <dependencies>
   
